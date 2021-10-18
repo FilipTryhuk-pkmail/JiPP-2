@@ -4,5 +4,8 @@ project(firstLib)
 
 set(CMAKE_CXX_STANDARD 20)
 
-#add_library(firstLib lib.h)
-add_executable(firstLib lib.cpp)
+add_executable(firstLib ${CMAKE_SOURCE_DIR}/src/main.cpp)
+
+add_subdirectory(include)
+target_link_libraries(firstLib include)
+target_include_directories(firstLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
