@@ -1,1 +1,1 @@
-add_library(include ${CMAKE_SOURCE_DIR}/src/lib.cpp)
+add_library(include ${CMAKE_SOURCE_DIR}/firstLib/src/lib.cpp)

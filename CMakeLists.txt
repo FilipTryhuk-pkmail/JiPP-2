@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(allocation_basics)
 add_subdirectory(firstLib)
-add_subdirectory(simpleCalc)
+add_subdirectory(lab2)

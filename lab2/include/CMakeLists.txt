@@ -1,0 +1,1 @@
+#add_library(lib2 ${CMAKE_SOURCE_DIR}/lab2/src/lib2.cpp)
