@@ -9,3 +9,7 @@ add_subdirectory(firstLib)
 add_subdirectory(lab2)
 add_subdirectory(FirstClass)
 add_subdirectory(lab4)
+add_subdirectory(matrixApp)
+add_subdirectory(matrixLib)
+
+
