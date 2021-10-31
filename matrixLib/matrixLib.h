@@ -5,6 +5,10 @@
 #ifndef JIPP_2_MATRIX_H
 #define JIPP_2_MATRIX_H
 
+
+void typeHelp();
+void help();
+
 int **addMatrix(int **mat1, int **mat2, int rows, int cols);
 int **subtractMatrix(int **mat1, int **mat2, int rows, int cols);
 int **multiplyMatrix(int **mat1, int **mat2, int rows, int cols1, int cols2);

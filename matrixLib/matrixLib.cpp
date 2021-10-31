@@ -9,6 +9,17 @@ using namespace std;
 
 // INT
 
+/*
+ * Dodaje dwie macierze liczb naturalnych
+ *
+ * **mat1 - macierz pierwsza liczb naturalnych
+ *
+ * **mat2 - macierz druga liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 int **addMatrix(int **mat1, int **mat2, int rows, int cols) {
 
     int** res = new int *[rows];
@@ -24,6 +35,17 @@ int **addMatrix(int **mat1, int **mat2, int rows, int cols) {
     return res;
 }
 
+/*
+ * Odejmuje dwie macierze liczb naturalnych, drugą od pierwszej
+ *
+ * **mat1 - macierz pierwsza liczb naturalnych
+ *
+ * **mat2 - macierz druga liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 int **subtractMatrix(int **mat1, int **mat2, int rows, int cols) {
 
     int** res = new int *[rows];
@@ -39,6 +61,17 @@ int **subtractMatrix(int **mat1, int **mat2, int rows, int cols) {
     return res;
 }
 
+/*
+ * Mnoży dwie macierze liczb naturalnych
+ *
+ * **mat1 - macierz pierwsza liczb naturalnych
+ *
+ * **mat2 - macierz druga liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 int **multiplyMatrix(int **mat1, int **mat2, int rows, int cols1, int cols2) {
 
     int** res = new int *[rows];
@@ -54,6 +87,17 @@ int **multiplyMatrix(int **mat1, int **mat2, int rows, int cols1, int cols2) {
     return res;
 }
 
+/*
+ * Mnoży macierz liczb naturalnych przez skalar
+ *
+ * **mat - macierz liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ *
+ * scalar - skalar, liczba naturalna
+ */
 int **multiplyByScalar(int **mat, int rows, int cols, int scalar) {
 
     int** res = new int *[rows];
@@ -69,6 +113,15 @@ int **multiplyByScalar(int **mat, int rows, int cols, int scalar) {
     return res;
 }
 
+/*
+ * Transponuje macierz liczb naturalnych
+ *
+ * mat1 - macierz liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 int **transposeMatrix(int **mat, int rows, int cols){
 
     int** res = new int *[cols];
@@ -84,6 +137,17 @@ int **transposeMatrix(int **mat, int rows, int cols){
     return res;
 }
 
+/*
+ * Podnosi macierz liczb naturalnych do podanej potęgi
+ *
+ * **mat - macierzliczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ *
+ * degree - stopień potęgi
+ */
 int **powerMatrix(int **mat, int rows, int cols, unsigned degree){
 
     int** res = new int *[rows];
@@ -99,6 +163,15 @@ int **powerMatrix(int **mat, int rows, int cols, unsigned degree){
     return res;
 }
 
+/*
+ * Oblicza determinantę macierzy liczb naturalnych
+ *
+ * **mat - macierz liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 int determinantMatrix(int **mat, int rows, int cols) {
 
     int det = 0;
@@ -121,6 +194,15 @@ int determinantMatrix(int **mat, int rows, int cols) {
     return det;
 }
 
+/*
+ * Sprawdza czy macierz jest diagonalna
+ *
+ * **mat - macierz liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 bool matrixIsDiagonal(int **mat, int rows, int cols) {
 
     bool diagonal = true;
@@ -135,12 +217,26 @@ bool matrixIsDiagonal(int **mat, int rows, int cols) {
     return diagonal;
 }
 
+/*
+ * Zamienia "w miejscu" dwie liczby naturalne
+ *
+ * a - pierwsza liczba naturalna
+ *
+ * b - druga liczba naturalna
+ */
 void swap(int &a, int &b) {
     int c = a;
     a = b;
     b = c;
 }
 
+/*
+ * Sortuje w kolejności rosnącej liczby naturalne w podanej tabeli
+ *
+ * arr[] - tabela liczb naturalnych
+ *
+ * cols - liczba elementów w tebeli
+ */
 void sortRow(int arr[], int cols) {
 
     bool finished;
@@ -156,6 +252,15 @@ void sortRow(int arr[], int cols) {
     }
 }
 
+/*
+ * Sortuje w kolejności rosnącej liczby naturalne w każdym wierszu podanej macierzy
+ *
+ * **mat - macierz liczb naturalnych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 void sortRowsInMatrix(int **mat, int rows, int cols) {
 
     for (int i=0; i<rows; i++) {
@@ -169,6 +274,17 @@ void sortRowsInMatrix(int **mat, int rows, int cols) {
 
 // DOUBLE
 
+/*
+ * Dodaje dwie macierze liczb zmiennoprzecinkowych
+ *
+ * **mat1 - macierz pierwsza liczb zmiennoprzecinkowych
+ *
+ * **mat2 - macierz druga liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 double **addMatrix(double **mat1, double **mat2, int rows, int cols) {
 
     double **res = new double *[rows];
@@ -184,6 +300,17 @@ double **addMatrix(double **mat1, double **mat2, int rows, int cols) {
     return res;
 }
 
+/*
+ * Odejmuje dwie macierze liczb zmiennoprzecinkowych, drugą od pierwszej
+ *
+ * **mat1 - macierz pierwsza liczb zmiennoprzecinkowych
+ *
+ * **mat2 - macierz druga liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 double **subtractMatrix(double **mat1, double **mat2, int rows, int cols) {
 
     double **res = new double *[rows];
@@ -199,6 +326,17 @@ double **subtractMatrix(double **mat1, double **mat2, int rows, int cols) {
     return res;
 }
 
+/*
+ * Mnoży dwie macierze liczb zmiennoprzecinkowych
+ *
+ * **mat1 - macierz pierwsza liczb zmiennoprzecinkowych
+ *
+ * **mat2 - macierz druga liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 double **multiplyMatrix(double **mat1, double **mat2, int rows, int cols1, int cols2) {
 
     double **res = new double *[rows];
@@ -214,6 +352,17 @@ double **multiplyMatrix(double **mat1, double **mat2, int rows, int cols1, int c
     return res;
 }
 
+/*
+ * Mnoży macierz liczb zmiennoprzecinkowych przez skalar
+ *
+ * **mat - macierz liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ *
+ * scalar - skalar, liczba naturalna
+ */
 double **multiplyByScalar(double **mat, int rows, int cols, double scalar) {
 
     double** res = new double *[rows];
@@ -229,6 +378,15 @@ double **multiplyByScalar(double **mat, int rows, int cols, double scalar) {
     return res;
 }
 
+/*
+ * Transponuje macierz liczb zmiennoprzecinkowych
+ *
+ * mat1 - macierz liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 double **transposeMatrix(double **mat, int rows, int cols){
 
     double **res = new double *[cols];
@@ -244,6 +402,17 @@ double **transposeMatrix(double **mat, int rows, int cols){
     return res;
 }
 
+/*
+ * Podnosi macierz liczb zmiennoprzecinkowych do podanej potęgi
+ *
+ * **mat - macierz liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ *
+ * degree - stopień potęgi
+ */
 double **powerMatrix(double **mat, int rows, int cols, unsigned degree){
 
     double **res = new double *[rows];
@@ -259,6 +428,15 @@ double **powerMatrix(double **mat, int rows, int cols, unsigned degree){
     return res;
 }
 
+/*
+ * Oblicza determinantę macierzy liczb zmiennoprzecinkowych
+ *
+ * **mat - macierz liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 double determinantMatrix(double **mat, int rows, int cols) {
 
     double det = 0;
@@ -281,6 +459,15 @@ double determinantMatrix(double **mat, int rows, int cols) {
     return det;
 }
 
+/*
+ * Sprawdza czy macierz liczb zmiennoprzecinkowe jest diagonalna
+ *
+ * **mat - macierz liczb zmiennoprzecinkowych
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 bool matrixIsDiagonal(double **mat, int rows, int cols) {
 
     bool diagonal = true;
@@ -295,12 +482,26 @@ bool matrixIsDiagonal(double **mat, int rows, int cols) {
     return diagonal;
 }
 
+/*
+ * Zamienia "w miejscu" dwie liczby zmiennoprzecinkowe
+ *
+ * a - pierwsza liczba
+ *
+ * b - druga liczba
+ */
 void swap(double &a, double &b) {
     double c = a;
     a = b;
     b = c;
 }
 
+/*
+ * Sortuje w kolejności rosnącej liczby zmiennoprzecinkowe w podanej tabeli
+ *
+ * arr[] - tabela liczb zmiennoprzecinkowe
+ *
+ * cols - liczba elementów w tebeli
+ */
 void sortRow(double arr[], int cols) {
 
     bool finished;
@@ -316,9 +517,36 @@ void sortRow(double arr[], int cols) {
     }
 }
 
+/*
+ * Sortuje w kolejności rosnącej liczby zmiennoprzecinkowe w każdym wierszu podanej macierzy
+ *
+ * **mat - macierz liczb zmiennoprzecinkowe
+ *
+ * rows - liczba wierszy
+ *
+ * cols - liczba kolumn
+ */
 void sortRowsInMatrix(double **mat, int rows, int cols) {
 
     for (int i=0; i<rows; i++) {
         sortRow(mat[i], cols);
     }
+}
+
+void typeHelp() {
+    cout << "Pierwszy argument wywołania powinien być \"int\" dla działań na liczbach" << endl;
+    cout << "całkowitych lub \"double\" dla liczby zmiennoprzecinkowych," << endl << endl;
+}
+
+void help() {
+    typeHelp();
+    cout << "Obsługiwane operacje na macierzach wraz z odpowiednią nazwą parametru:" << endl;
+    cout << "\t\"+\"" << endl << "Dodaje dwie macierze." << endl << endl;
+    cout << "\t\"-\"" << endl << "Odejmuje macierz drugą od pierwszej" << endl << endl;
+    cout << "\t\"*m\"" << endl << "Mnoży macierz pierwszą przez macierz drugą" << endl << endl;
+    cout << "\t\"*s\"" << endl << "Mnoży macierz przez skalar" << endl << endl;
+    cout << "\t\"t\"" << endl << "Transponuje macierz" << endl << endl;
+    cout << "\t\"^\"" << endl << "Podnosi macierz do podanej potęgi" << endl << endl;
+    cout << "\t\"det\"" << endl << "Liczy determinantę macierzy" << endl << endl;
+    cout << "\t\"sort\"" << endl << "Sortuje w kolejności rosnącej elementy w każdym wierszu macierzy" << endl << endl;
 }
