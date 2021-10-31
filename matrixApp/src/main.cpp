@@ -8,53 +8,226 @@
 
 using namespace std;
 
+void printMatrix(int **arr, int rows, int cols);
+void printMatrix(double **arr, int rows, int cols);
+
 int main(int argc, char *argv[]) {
 
+    //Pobierz od uźytkownika rozmiar macierzy
+    bool ints;
     int rows = 0;
     int cols = 0;
-    cout << "Podaj liczbę wierszy i kolumn oddzielone spacjami" << endl;
+    cout << "Podaj liczby wierszy i kolumn pierwszej macierzy oddzielone spacjami" << endl;
+    //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
     cin >> rows >> cols;
 
-    int **test_arr1, **test_arr2;
-    test_arr1 = new int *[rows];
-    test_arr2 = new int *[rows];
-    for (int i=0; i<rows; i++) {
-        test_arr1[i] = new int[cols];
-        test_arr2[i] = new int[cols];
-    }
-/*
-    for(int i=0; i<rows; i++) {
-        test_arr1[i][i] = i;
-        test_arr2[rows -1-i][rows -1-i] = i;
-        if(i < (rows - 1)) {
-            test_arr1[i][i+1] = 2;
-            test_arr2[i+1][i] = 3;
-        }
-    }
-*/
-
-    double **d_arr1, **d_arr2;
-    d_arr1 = new double *[rows];
-    d_arr2 = new double *[rows];
-    for (int i=0; i<rows; i++) {
-        d_arr1[i] = new double[cols];
-        d_arr2[i] = new double[cols];
-    }
-/*
-    for(int i=0; i<rows; i++) {
-        d_arr1[i][i] = i + 0.5;
-        d_arr2[rows -1-i][rows -1-i] = i + 0.5;
-        if(i < (rows - 1)) {
-            d_arr1[i][i+1] = 1.7;
-            d_arr2[i+1][i] = 2.7;
-        }
+    //Sprawdź, czy użytkownik zapytał o pomoc
+    if (string(argv[1]) == "help") {
+        help();
+        return 1;
     }
 
-    double **mul = multiplyMatrix(d_arr2, d_arr1, rows, cols, cols);
+    //Sprawdź, czy podano odpowiednią liczbę parametrów
+    if (argc != 3) {
+        help();
+        return 1;
+    }
+
+    //Odczytaj typ liczb i przygotuj macierze odpowiednich typów
+    if (string(argv[1]) == "int") {
+        ints = true;
+    }
+    else if (string(argv[1]) == "double") {
+        ints = false;
+    } else {
+        typeHelp();
+        cout << endl << endl << argv[1] << endl << argv[2] << endl << argv[3];
+        return 1;
+    }
+
+    //Przygotuj macierze odpowednich rozmiarów jako tablice wskaźników do wskaźników
+    int **iArr1, **iArr2;
+    iArr1 = new int *[rows];
+    iArr2 = new int *[rows];
+    for (int i = 0; i < rows; i++) {
+        iArr1[i] = new int[cols];
+        iArr2[i] = new int[cols];
+    }
+    double **dArr1, **dArr2;
+    dArr1 = new double *[rows];
+    dArr2 = new double *[rows];
+    for (int i = 0; i < rows; i++) {
+        dArr1[i] = new double[cols];
+        dArr2[i] = new double[cols];
+    }
+
+    //Wczytaj macierz na której wykonana zostanie wybrana operacja
+    if (ints) {
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<rows; j++) {
+                cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy pierwszej" << endl;
+                //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
+                cin >> iArr1[i][j];
+            }
+            cout << endl;
+        }
+    } else {
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<rows; j++) {
+                cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy pierwszej" << endl;
+                //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
+                cin >> dArr1[i][j];
+            }
+            cout << endl;
+        }
+    }
+
+    //Wczytaj drugą macierz jeśli operacja wymaga dwóch
+    if (string(argv[2]) == "a" || string(argv[2]) == "s" || string(argv[2]) == "m2") {
+        if (ints) {
+            for (int i=0; i<rows; i++) {
+                for (int j=0; j<rows; j++) {
+                    cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy drugiej" << endl;
+                    //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
+                    cin >> iArr2[i][j];
+                }
+                cout << endl;
+            }
+        } else {
+            for (int i=0; i<rows; i++) {
+                for (int j=0; j<rows; j++) {
+                    cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy drugiej" << endl;
+                    //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
+                    cin >> dArr2[i][j];
+                }
+                cout << endl;
+            }
+        }
+    }
+
+
+    if (string(argv[2]) == "a") {
+        if (ints) {
+            int **res = addMatrix(iArr1, iArr2, rows, cols);
+            printMatrix(res, rows, cols);
+        } else {
+            double **res = addMatrix(dArr1, dArr2, rows, cols);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "s") {
+        if (ints) {
+            int **res = subtractMatrix(iArr1, iArr2, rows, cols);
+            printMatrix(res, rows, cols);
+        } else {
+            double **res = subtractMatrix(dArr1, dArr2, rows, cols);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "m2") {
+        if (ints) {
+            int **res = multiplyMatrix(iArr1, iArr2, rows, cols, cols);
+            printMatrix(res, rows, cols);
+        } else {
+            double **res = multiplyMatrix(dArr1, dArr2, rows, cols, cols);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "ms") {
+        if (ints) {
+            int scalar = 1;
+            cout << "Podaj liczbę naturalną - skalar" << endl;
+            cin >> scalar;
+            int **res = multiplyByScalar(iArr1, rows, cols, scalar);
+            printMatrix(res, rows, cols);
+        } else {
+            double scalar = 1;
+            cout << "Podaj liczbę zmiennoprzecinkową - skalar" << endl;
+            cin >> scalar;
+            double **res = multiplyByScalar(dArr1, rows, cols, scalar);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "t") {
+        if (ints) {
+            int **res = transposeMatrix(iArr1, rows, cols);
+            printMatrix(res, rows, cols);
+        } else {
+            double **res = transposeMatrix(dArr1, rows, cols);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "p") {
+        unsigned degree;
+        cout << "Podaj liczbę naturalną - stopień potęgi" << endl;
+        cin >> degree;
+        if (ints) {
+            int **res = powerMatrix(iArr1, rows, cols, degree);
+            printMatrix(res, rows, cols);
+        } else {
+            double **res = powerMatrix(dArr1, rows, cols, degree);
+            printMatrix(res, rows, cols);
+        }
+    } else if (string(argv[2]) == "det") {
+        if (ints) {
+            int res = determinantMatrix(iArr1, rows, cols);
+            cout << endl << endl;
+            cout << "Determinanta podanej macierzy to: " << res << endl;
+        } else {
+            double res = determinantMatrix(dArr1, rows, cols);
+            cout << endl << endl;
+            cout << "Determinanta podanej macierzy to: " << res << endl;
+        }
+    } else if (string(argv[2]) == "i") {
+        if (ints) {
+            bool res = matrixIsDiagonal(iArr1, rows, cols);
+            if (res) {cout << endl << endl << "Podana macierz jest diagonalna." << endl; }
+            else {cout << endl << endl << "Podana macierz nie jest diagonalna." << endl; }
+        } else {
+            bool res = matrixIsDiagonal(dArr1, rows, cols);
+            if (res) {cout << endl << endl << "Podana macierz jest diagonalna." << endl; }
+            else {cout << endl << endl << "Podana macierz nie jest diagonalna." << endl; }
+        }
+    } else if (string(argv[2]) == "sort") {
+        if (ints) {
+            sortRowsInMatrix(iArr1, rows, cols);
+            printMatrix(iArr1, rows, cols);
+        } else {
+            sortRowsInMatrix(dArr1, rows, cols);
+            printMatrix(dArr1, rows, cols);
+        }
+    } else {
+        cout << "Niepoprawny parametr operacji!" << endl;
+        cout << "Wyświetlam pomoc" << endl << endl;
+        help();
+        return 1;
+    }
+
+
+
+
+
+
+
+    /* legacy test code to check individual functions
+    for(int i=0; i<rows; i++) {
+        iArr1[i][i] = i;
+        iArr2[rows - 1 - i][rows - 1 - i] = i;
+        if(i < (rows - 1)) {
+            iArr1[i][i + 1] = 2;
+            iArr2[i + 1][i] = 3;
+        }
+    }
+
+    for(int i=0; i<rows; i++) {
+        dArr1[i][i] = i + 0.5;
+        dArr2[rows - 1 - i][rows - 1 - i] = i + 0.5;
+        if(i < (rows - 1)) {
+            dArr1[i][i + 1] = 1.7;
+            dArr2[i + 1][i] = 2.7;
+        }
+    }
+
+    double **mul = multiplyMatrix(dArr2, dArr1, rows, cols, cols);
     cout << endl;
     for (int i=0; i<rows; i++) {
         for(int j=0; j<cols; j++) {
-            cout << d_arr1[i][j] << " ";
+            cout << dArr1[i][j] << " ";
         }
         cout << endl << endl;
     }
@@ -64,14 +237,14 @@ int main(int argc, char *argv[]) {
         }
         cout << endl << endl;
     }
-*/
-/*
+
+
     for(int i=0; i<rows; i++) {
-        test_arr1[i][i] = i;
-        test_arr2[rows -1-i][rows -1-i] = i;
+        iArr1[i][i] = i;
+        iArr2[rows - 1 - i][rows - 1 - i] = i;
         if(i < (rows - 1)) {
-            test_arr1[i][i+1] = 2;
-            test_arr2[i+1][i] = 3;
+            iArr1[i][i + 1] = 2;
+            iArr2[i + 1][i] = 3;
         }
     }
 
@@ -104,23 +277,23 @@ int main(int argc, char *argv[]) {
     cout << endl << a << " " << b << endl;
 
 
-    int **add = addMatrix(test_arr2, test_arr1, rows, cols);                    //OK
-    int **subst = subtractMatrix(test_arr2, test_arr1, rows, cols);             //OK
-    int **mul = multiplyMatrix(test_arr2, test_arr1, rows, cols, cols);         //OK
-    int **by_scalar = multiplyByScalar(small_arr1, 3, 3, 4);                    //OK
-    int **transpose = transposeMatrix(small_arr1, 4, 3);                        //OK
-    int **power = powerMatrix(test_arr1, rows, cols, 3);                        //OK
-    int det = determinantMatrix(small_arr1, 3, 3);                              //not OK, only hardcoded for 2x2 and 3x3
-    bool diag = matrixIsDiagonal(test_arr1, rows, cols);                        //OK
-    swap(a, b);                                                                 //OK
-    sortRow(row, 5);                                                            //OK
-    sortRowsInMatrix(test_arr1, rows, cols);                                    //OK
+    int **add = addMatrix(iArr2, iArr1, rows, cols);                    //OK
+    int **subst = subtractMatrix(iArr2, iArr1, rows, cols);             //OK
+    int **mul = multiplyMatrix(iArr2, iArr1, rows, cols, cols);         //OK
+    int **by_scalar = multiplyByScalar(small_arr1, 3, 3, 4);            //OK
+    int **transpose = transposeMatrix(small_arr1, 4, 3);                //OK
+    int **power = powerMatrix(iArr1, rows, cols, 3);                    //OK
+    int det = determinantMatrix(small_arr1, 3, 3);                      //not OK, only hardcoded for 2x2 and 3x3
+    bool diag = matrixIsDiagonal(iArr1, rows, cols);                    //OK
+    swap(a, b);                                                         //OK
+    sortRow(row, 5);                                                    //OK
+    sortRowsInMatrix(iArr1, rows, cols);                                //OK
 
 
     cout << endl << endl;
     for (int i=0; i<rows; i++) {
         for(int j=0; j<cols; j++) {
-            cout << test_arr1[i][j] << " ";
+            cout << iArr1[i][j] << " ";
         }
         cout << endl << endl;
     }
@@ -137,4 +310,26 @@ int main(int argc, char *argv[]) {
     }
 */
     return 0;
+}
+
+
+
+void printMatrix(int **arr, int rows, int cols) {
+    cout << endl << endl;
+    for (int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl << endl;
+    }
+}
+
+void printMatrix(double **arr, int rows, int cols) {
+    cout << endl << endl;
+    for (int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl << endl;
+    }
 }

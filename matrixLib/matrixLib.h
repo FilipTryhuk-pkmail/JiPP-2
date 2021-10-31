@@ -25,7 +25,7 @@ void sortRowsInMatrix(int **mat, int rows, int cols);
 double **addMatrix(double **mat1, double **mat2, int rows, int cols);
 double **subtractMatrix(double **mat1, double **mat2, int rows, int cols);
 double **multiplyMatrix(double **mat1, double **mat2, int rows, int cols1, int cols2);
-double **multiplyByScalar(double **mat, double rows, int cols, double scalar);
+double **multiplyByScalar(double **mat, int rows, int cols, double scalar);
 double **transposeMatrix(double **mat, int rows, int cols);
 double **powerMatrix(double **mat, int rows, int cols, unsigned degree);
 double determinantMatrix(double **mat, int rows, int cols);

@@ -540,13 +540,15 @@ void typeHelp() {
 
 void help() {
     typeHelp();
-    cout << "Obsługiwane operacje na macierzach wraz z odpowiednią nazwą parametru:" << endl;
-    cout << "\t\"+\"" << endl << "Dodaje dwie macierze." << endl << endl;
-    cout << "\t\"-\"" << endl << "Odejmuje macierz drugą od pierwszej" << endl << endl;
-    cout << "\t\"*m\"" << endl << "Mnoży macierz pierwszą przez macierz drugą" << endl << endl;
-    cout << "\t\"*s\"" << endl << "Mnoży macierz przez skalar" << endl << endl;
+    cout << "Aby wybrać operację podaj ją opowiedni symbol jako drugi parametr" << endl;
+    cout << "Obsługiwane operacje na macierzach wraz z odpowiednim symbolem:" << endl;
+    cout << "\t\"a\"" << endl << "Dodaje dwie macierze." << endl << endl;
+    cout << "\t\"s\"" << endl << "Odejmuje macierz drugą od pierwszej" << endl << endl;
+    cout << "\t\"m2\"" << endl << "Mnoży macierz pierwszą przez macierz drugą" << endl << endl;
+    cout << "\t\"ms\"" << endl << "Mnoży macierz przez skalar" << endl << endl;
     cout << "\t\"t\"" << endl << "Transponuje macierz" << endl << endl;
-    cout << "\t\"^\"" << endl << "Podnosi macierz do podanej potęgi" << endl << endl;
+    cout << "\t\"p\"" << endl << "Podnosi macierz do podanej potęgi" << endl << endl;
     cout << "\t\"det\"" << endl << "Liczy determinantę macierzy" << endl << endl;
+    cout << "\t\"i\"" << endl << "Sprawdza, czy macierz jest diagonalna" << endl << endl;
     cout << "\t\"sort\"" << endl << "Sortuje w kolejności rosnącej elementy w każdym wierszu macierzy" << endl << endl;
 }
