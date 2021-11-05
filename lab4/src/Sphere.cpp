@@ -12,4 +12,5 @@ Sphere::Sphere(unsigned int radius) {
 double Sphere::calculateVolume() {
     double volume = (4/3.) * PI;
     volume *= radius * radius * radius;
+    return volume;
 }

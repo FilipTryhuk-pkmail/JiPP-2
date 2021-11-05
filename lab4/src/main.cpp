@@ -5,6 +5,11 @@
 #include <iostream>
 #include <string>
 #include "Cuboid.h"
+#include "Sphere.h"
+#include "FunkcjaKwadratowa.h"
+#include "Student.h"
+#include "Punkt.h"
+#include "Figura.h"
 
 using namespace std;
 
@@ -33,5 +38,26 @@ int main(int argc, char *argv[]) {
     Cuboid bryla(4, 6, 5);
     cout << endl << "Objętość graniastosłupa: " << bryla.calculateVolume() << endl;
 
+    Sphere kula(5);
+    cout << endl << "Objętość kuli: " << kula.calculateVolume() << endl << endl;
+
+    FunkcjaKwadratowa func(1, 2, 4);
+    func.displayFunc();
+
+    Student abc("Jan", "Kowalski", 366521, 20, 13);
+    cout << endl << "Student udzielił " << abc.calculateCorrect() << "% poprawnych odpowiedzi." << endl;
+
+    Punkt x1(3, 2);
+    Punkt x2(9,7);
+
+    cout << endl << "Distance between the points is equal to: " << x1.distance(x1, x2) << endl;
+
+    Punkt wierzch[3];
+    wierzch[0] = Punkt(5,1);
+    wierzch[1] = Punkt(1,5);
+    wierzch[2] = Punkt(3, 3);
+
+    Figura fig1(3, wierzch);
+    cout << endl << fig1.vArray[2].yPos << endl;
     return 0;
 }
