@@ -11,5 +11,6 @@ add_subdirectory(FirstClass)
 add_subdirectory(lab4)
 add_subdirectory(matrixApp)
 add_subdirectory(matrixLib)
-
+add_subdirectory(lab5_example)
+add_subdirectory(lab5)
 
