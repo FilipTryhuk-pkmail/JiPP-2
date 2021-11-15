@@ -20,19 +20,23 @@ int main(int argc, char *argv[]) {
     cout << "Podaj liczby wierszy i kolumn pierwszej macierzy oddzielone spacjami" << endl;
     //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
     cin >> rows >> cols;
-
-    //Sprawdź, czy użytkownik zapytał o pomoc
-    if (string(argv[1]) == "help") {
+    try {
+        //Sprawdź, czy użytkownik zapytał o pomoc
+        if (string(argv[1]) == "help") {
+            help();
+            return 1;
+        }
+    }
+    catch (logic_error) {
         help();
         return 1;
     }
-
     //Sprawdź, czy podano odpowiednią liczbę parametrów
-    if (argc != 3) {
+    if (argc != 2) {
         help();
         return 1;
     }
-
+/*
     //Odczytaj typ liczb i przygotuj macierze odpowiednich typów
     if (string(argv[1]) == "int") {
         ints = true;
@@ -43,7 +47,7 @@ int main(int argc, char *argv[]) {
         typeHelp();
         cout << endl << endl << argv[1] << endl << argv[2] << endl << argv[3];
         return 1;
-    }
+    } */ ints = true;
 
     //Przygotuj macierze odpowednich rozmiarów jako tablice wskaźników do wskaźników
     int **iArr1, **iArr2;
@@ -60,7 +64,7 @@ int main(int argc, char *argv[]) {
         dArr1[i] = new double[cols];
         dArr2[i] = new double[cols];
     }
-
+/*
     //Wczytaj macierz na której wykonana zostanie wybrana operacja
     if (ints) {
         for (int i=0; i<rows; i++) {
@@ -71,19 +75,42 @@ int main(int argc, char *argv[]) {
             }
             cout << endl;
         }
-    } else {
-        for (int i=0; i<rows; i++) {
-            for (int j=0; j<rows; j++) {
-                cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy pierwszej" << endl;
-                //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
-                cin >> dArr1[i][j];
-            }
-            cout << endl;
-        }
-    }
+    }*/
+//    else {
+      for (int i=0; i<rows; i++) {
+          for (int j=0; j<rows; j++) {
+              cout << "Podaj liczbę na miejsce " << j << " w wierszu " << i << " macierzy pierwszej" << endl;
+              //cin automatycznie zabezpiecza przed wpisanie zmiennej niewłaściwego typu
+              cin >> dArr1[i][j];
+              //jeżeli którakolwiek z liczb jest niecałkowita ustaw bool ints na false
+              if (((dArr1[i][j] - int(dArr1[i][j])) > 0.0001) || ((int(dArr1[i][j] - dArr1[i][j])) > 0.0001)) {ints = false;}
+          }
+          cout << endl;
+      }
+      if (ints) {
+          //jeżeli wszystkie były całkowite to przenieś liczby do tabeli intów
+          for (int i=0; i<rows; i++) {
+              for (int j=0; j<rows; j++) {
+                  iArr1[i][j] = int(dArr1[i][j]);
+              }
+          }
+          //następnie usuń zbędną macierz liczb całkowitych
+          for (int i=0; i<rows; i++) {
+                  delete dArr1[i];
+          }
+          delete dArr1;
+      }
+      else {
+          //jeżeli są liczby całkowite to usuń macierz naturalną
+          for (int i=0; i<rows; i++) {
+              delete iArr1[i];
+          }
+          delete iArr1;
+      }
+//    }
 
     //Wczytaj drugą macierz jeśli operacja wymaga dwóch
-    if (string(argv[2]) == "a" || string(argv[2]) == "s" || string(argv[2]) == "m2") {
+    if (string(argv[1]) == "a" || string(argv[1]) == "s" || string(argv[1]) == "m2") {
         if (ints) {
             for (int i=0; i<rows; i++) {
                 for (int j=0; j<rows; j++) {
@@ -93,6 +120,11 @@ int main(int argc, char *argv[]) {
                 }
                 cout << endl;
             }
+            //usuń zbędną macierz
+            for (int i=0; i<rows; i++) {
+                delete dArr2[i];
+            }
+            delete dArr2;
         } else {
             for (int i=0; i<rows; i++) {
                 for (int j=0; j<rows; j++) {
@@ -102,11 +134,25 @@ int main(int argc, char *argv[]) {
                 }
                 cout << endl;
             }
+            //usuń zbędną macierz
+            for (int i=0; i<rows; i++) {
+                delete iArr2[i];
+            }
+            delete iArr2;
         }
+    } else {
+        //usuń obie zbędne macierze
+        //usuń zbędną macierz
+        for (int i=0; i<rows; i++) {
+            delete dArr2[i];
+            delete iArr2[i];
+        }
+        delete dArr2;
+        delete iArr2;
     }
 
 
-    if (string(argv[2]) == "a") {
+    if (string(argv[1]) == "a") {
         if (ints) {
             int **res = addMatrix(iArr1, iArr2, rows, cols);
             printMatrix(res, rows, cols);
@@ -114,7 +160,7 @@ int main(int argc, char *argv[]) {
             double **res = addMatrix(dArr1, dArr2, rows, cols);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "s") {
+    } else if (string(argv[1]) == "s") {
         if (ints) {
             int **res = subtractMatrix(iArr1, iArr2, rows, cols);
             printMatrix(res, rows, cols);
@@ -122,7 +168,7 @@ int main(int argc, char *argv[]) {
             double **res = subtractMatrix(dArr1, dArr2, rows, cols);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "m2") {
+    } else if (string(argv[1]) == "m2") {
         if (ints) {
             int **res = multiplyMatrix(iArr1, iArr2, rows, cols, cols);
             printMatrix(res, rows, cols);
@@ -130,7 +176,7 @@ int main(int argc, char *argv[]) {
             double **res = multiplyMatrix(dArr1, dArr2, rows, cols, cols);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "ms") {
+    } else if (string(argv[1]) == "ms") {
         if (ints) {
             int scalar = 1;
             cout << "Podaj liczbę naturalną - skalar" << endl;
@@ -144,7 +190,7 @@ int main(int argc, char *argv[]) {
             double **res = multiplyByScalar(dArr1, rows, cols, scalar);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "t") {
+    } else if (string(argv[1]) == "t") {
         if (ints) {
             int **res = transposeMatrix(iArr1, rows, cols);
             printMatrix(res, rows, cols);
@@ -152,7 +198,7 @@ int main(int argc, char *argv[]) {
             double **res = transposeMatrix(dArr1, rows, cols);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "p") {
+    } else if (string(argv[1]) == "p") {
         unsigned degree;
         cout << "Podaj liczbę naturalną - stopień potęgi" << endl;
         cin >> degree;
@@ -163,7 +209,7 @@ int main(int argc, char *argv[]) {
             double **res = powerMatrix(dArr1, rows, cols, degree);
             printMatrix(res, rows, cols);
         }
-    } else if (string(argv[2]) == "det") {
+    } else if (string(argv[1]) == "det") {
         if (ints) {
             int res = determinantMatrix(iArr1, rows, cols);
             cout << endl << endl;
@@ -173,7 +219,7 @@ int main(int argc, char *argv[]) {
             cout << endl << endl;
             cout << "Determinanta podanej macierzy to: " << res << endl;
         }
-    } else if (string(argv[2]) == "i") {
+    } else if (string(argv[1]) == "i") {
         if (ints) {
             bool res = matrixIsDiagonal(iArr1, rows, cols);
             if (res) {cout << endl << endl << "Podana macierz jest diagonalna." << endl; }
@@ -183,7 +229,7 @@ int main(int argc, char *argv[]) {
             if (res) {cout << endl << endl << "Podana macierz jest diagonalna." << endl; }
             else {cout << endl << endl << "Podana macierz nie jest diagonalna." << endl; }
         }
-    } else if (string(argv[2]) == "sort") {
+    } else if (string(argv[1]) == "sort") {
         if (ints) {
             sortRowsInMatrix(iArr1, rows, cols);
             printMatrix(iArr1, rows, cols);

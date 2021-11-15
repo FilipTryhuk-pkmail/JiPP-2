@@ -80,7 +80,15 @@ int **multiplyMatrix(int **mat1, int **mat2, int rows, int cols1, int cols2) {
 
     for (int i=0; i<rows; i++) {
         for (int j=0; j<cols2; j++) {
-            res[i][j] = mat1[i][j] + mat2[i][j];
+            res[i][j] = 0;
+            int m=0, n=0;
+            for (int k=0; k<cols2; k++) {
+                res[i][j] += mat1[i][j+m]*mat2[i+n][j];
+                m++;
+                n++;
+                if (j+m >= cols1) {m=(-1 * j);}
+                if (i+n >= rows) {n=(-1 * i);}
+            }
         }
     }
 
@@ -345,7 +353,15 @@ double **multiplyMatrix(double **mat1, double **mat2, int rows, int cols1, int c
 
     for (int i=0; i<rows; i++) {
         for (int j=0; j<cols2; j++) {
-            res[i][j] = mat1[i][j] + mat2[i][j];
+            res[i][j] = 0;
+            int m=0, n=0;
+            for (int k=0; k<cols2; k++) {
+                res[i][j] += mat1[i][j+m]*mat2[i+n][j];
+                m++;
+                n++;
+                if (j+m >= cols1) {m=(-1 * j);}
+                if (i+n >= rows) {n=(-1 * i);}
+            }
         }
     }
 
@@ -539,8 +555,8 @@ void typeHelp() {
 }
 
 void help() {
-    typeHelp();
-    cout << "Aby wybrać operację podaj ją opowiedni symbol jako drugi parametr" << endl;
+//    typeHelp();
+    cout << "Aby wybrać operację podaj opowiedni symbol jako parametr" << endl;
     cout << "Obsługiwane operacje na macierzach wraz z odpowiednim symbolem:" << endl;
     cout << "\t\"a\"" << endl << "Dodaje dwie macierze." << endl << endl;
     cout << "\t\"s\"" << endl << "Odejmuje macierz drugą od pierwszej" << endl << endl;
