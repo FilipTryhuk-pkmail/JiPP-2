@@ -7,11 +7,13 @@
 
 #include <iostream>
 #include "Task.h"
+#include <vector>
+
 using namespace std;
 
 class Scheduler {
 private:
-    vector <Task *> tasks;
+    vector <Task *> tasks{};
     unsigned sleeptime;
     unsigned amountOfCall = 0;
 

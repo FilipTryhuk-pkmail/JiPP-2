@@ -8,6 +8,8 @@
 
 class Task {
 
+public:
+    void run() {}
 };
 
 
