@@ -55,6 +55,8 @@ public:
      */
     static void takeDamage(double damage);
     bool alive = true;
+
+    ~Card() = default;
 };
 
 #endif //JIPP_2_CARD_H
