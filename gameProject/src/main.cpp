@@ -11,9 +11,22 @@
 
 using namespace std;
 
+/**
+ * Display launch param help for the user
+ */
 void help();
+
+/**
+ * Show overloaded addition operator (+) functionality
+ */
 void overload();
 
+/**
+ * Sibling functions for signalling damage from one Card object to another
+ * @tparam T Generic type for damage target
+ * @param mage Card object dealing damage (ranger and fighter in the sibling functions)
+ * @param target Card object getting attacked
+ */
 template<typename T>
 void attack(MagicCard &mage, T &target) {
     target.takeDamage(mage.getPower()*0.8, mage.true_damage_dealt);
@@ -40,7 +53,6 @@ int main(int argc, char *argv[]) {
     vector <Card*> playerUnits;
     vector <Card*> enemyUnits;
     try {
-        //Sprawdź, czy użytkownik zapytał o pomoc
         if (string(argv[1]) == "help") {
             help();
             return 1;
@@ -51,13 +63,12 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    //wywolaj demnostacje przeciazenia opeatorow
     if (string(argv[1]) == "o") {
         overload();
         return 1;
     }
 
-    //Sprawdź, czy podano odpowiednią liczbę parametrów
+    //Check parameters
     if (argc != 2) {
         help();
         return 1;
@@ -340,6 +351,8 @@ int main(int argc, char *argv[]) {
         logFile << endl;
 
     }
+
+    //Determine the outcome of the battle
     if (enemyUnits.empty()) {
         cout << "You won! Congratulations!" << endl;
         logFile << "You won! Congratulations!" << endl << endl << endl;
