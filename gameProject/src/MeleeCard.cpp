@@ -39,3 +39,7 @@ MeleeCard::MeleeCard(string name, double power, double life_max, int armor) : Ca
 void MeleeCard::setArmor(int newArmor) {
     armor = newArmor;
 }
+
+MeleeCard MeleeCard::operator+(const MeleeCard &rhs) const {
+    return {name, power + rhs.power, life_max + rhs.life_max, armor + rhs.armor};
+}

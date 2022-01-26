@@ -12,6 +12,7 @@
 using namespace std;
 
 void help();
+void overload();
 
 template<typename T>
 void attack(MagicCard &mage, T &target) {
@@ -47,6 +48,12 @@ int main(int argc, char *argv[]) {
     }
     catch (logic_error) {
         help();
+        return 1;
+    }
+
+    //wywolaj demnostacje przeciazenia opeatorow
+    if (string(argv[1]) == "o") {
+        overload();
         return 1;
     }
 
@@ -345,9 +352,18 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+void overload() {
+    MeleeCard Fighter01 = MeleeCard("Fighter01", 100, 1000, 10);
+    MeleeCard Fighter02 = MeleeCard("Fighter02", 200, 2000, 20);
+    MeleeCard Fighter03 = Fighter01 + Fighter02;
+    cout << "Adding the two fighters together we get a Fighter MeleeCard with combined stats" << endl;
+    cout << "For example, combined life: " << Fighter03.getMaxLife() << endl;
+}
+
 void help() {
     cout << "To start the game chose a mode as a launch parameter:" << endl;
     cout << "\t\"e\"" << endl << "Easy - a group of weak undead." << endl << endl;
     cout << "\t\"h\"" << endl << "Hard - a demonic assault party." << endl << endl;
     cout << "\t\"c\"" << endl << "Custom - design the enemies yourself." << endl << endl;
+    cout << "\t\"o\"" << endl << "Overload - show how two cards can be added via overloaded \"+=\"" << endl << endl;
 }

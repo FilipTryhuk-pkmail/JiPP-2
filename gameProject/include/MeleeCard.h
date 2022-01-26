@@ -19,6 +19,7 @@ public:
     void takeDamage(double damage);
     void takeDamage(double damage, double true_damage_percent);
     void setArmor(int newArmor);
+    MeleeCard operator+(const MeleeCard &rhs) const;
 };
 
 #endif //JIPP_2_MELEECARD_H

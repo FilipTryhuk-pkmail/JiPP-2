@@ -25,10 +25,8 @@ public:
     string getName();
     static void takeDamage(double damage);
     bool alive = true;
+    Card &operator+=(const Card &rhs);
 
-//    void printHealth() {
-//        cout << "Current health: " << life_cur << " out of " << life_max << endl;
-//    }
 };
 
 #endif //JIPP_2_CARD_H
